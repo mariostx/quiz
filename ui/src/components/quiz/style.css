@@ -1,0 +1,101 @@
+div {
+  text-align: center;
+  color: white;
+}
+
+.label {
+  color: white;
+  min-width: 1000px;
+}
+
+.statistics {
+  color: lightblue;
+  font-weight: bold;
+  padding-top: 10px;
+  height: 50px;
+}
+
+/* https://stackoverflow.com/questions/5703552/how-can-i-center-text-horizontally-and-vertically-inside-a-div-block */
+/* https://blog.hubspot.com/website/center-div-css */
+.question {
+  color: white;
+  font-size: 1.5rem;
+  white-space: wrap;
+  max-width: 600px;
+  height: 75px;
+  padding-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: inline-block;
+}
+
+.answer {
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+  .gray-transparent {background-color: rgba(255, 255, 255, 0.1);} /* Green */
+
+  .background {
+    /* background-color: silver; */
+    height: 70vh;
+  }
+
+ .backgroundImage {
+    /* backgroundImage:  `url(images/board-114656_960_720.jpg)`; */
+    background-image:  url("images/chalkboard-chalk-texture-school-board-display-background_43429-108.jpg");
+    min-width: 50vw;
+    min-height: 40vh;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+  background-color: #4c90af; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.question-pagination {
+  color: white;
+  margin-left: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-right: 30px;
+  display: inline-block;
+  min-width: 50vw;
+  text-align:right;
+  display: inline-table;
+}
+
+label {
+  color: white;
+}
+
+buttons button:hover {
+  transform: translateY(-2px);
+}
+
+.stoperica {
+  color: white;
+}

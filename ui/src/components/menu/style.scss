@@ -1,0 +1,18 @@
+$menuColor: #33CCFF;
+
+.menu {
+    min-height: 40px;
+    background-color: $menuColor;
+    color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 30px;
+    margin: 30px 150px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    
+    &:hover {
+        color: cornflowerblue;
+      }
+}
