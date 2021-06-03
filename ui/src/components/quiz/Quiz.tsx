@@ -111,7 +111,7 @@ const Quiz: FC = () => {
       answers.forEach((answer, index) => {
         elements.push(
           <Choice key={"panel" + index}>
-            <div key={index}>
+            <div className="choice" key={index}>
               <br />
               <div className="answer gray-transparent">
                 <label
@@ -172,19 +172,19 @@ const Quiz: FC = () => {
   };
 
   return (
-    <>
+    <div className="quiz-container">
       <div className="statistics">
         Pitanje: {index + 1}/{questions.length}
         {isTimerActive && (
           <div className="statistics">{Math.ceil(seconds / 10)}</div>
         )}
       </div>
-      <div className="background">
-        <div
-          className="backgroundImage"
+      <div className="question-container">
+        {/* <div
+          className="background"
           tabIndex={-1}
           onKeyDown={(e) => handleKeyDown(e)}
-        >
+        > */}
           {/* <div style={{
                         alignContent: '100px 100px' 
                     }}> */}
@@ -239,7 +239,7 @@ const Quiz: FC = () => {
               </div>
             )}
           </div>
-        </div>
+        {/* </div> */}
       </div>
       <div className="stoperica">
         <label>
@@ -251,7 +251,7 @@ const Quiz: FC = () => {
           Štoperica
         </label>
       </div>
-    </>
+    </div>
   );
 };
 
