@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import data from "dummy/questions.json";
+import data from "mock/questions.json";
 // import background from '../../../public/board-114656_960_720.jpg'
 import "./style.css";
 

@@ -1,0 +1,35 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "question": "Iz koje zemlje potječu Olimpijske igre?",
+            "answers": ["Španjolska", "Engleska", "Grčka", "Italija"],
+            "correct": [2]
+    
+        },
+        {
+            "id": 2,
+            "question": "Dolly je bila prvo klonirano živo biće ikad. O kojoj se životinji radilo?",
+            "answers": ["Štakoru", "Ovci", "Svinji", "Golubu"],
+            "correct": [1]
+        },
+        {
+            "id": 3,
+            "question": "Koje ime ne pripada sedmorici patuljaka?",
+            "answers": ["Srećko", "Plačko", "Glupko", "Ljutko"],
+            "correct": [1]
+        },
+        {
+            "id": 4,
+            "question": "Koja se životinja hrani gotovo isključivo bambusom?",
+            "answers": ["Panda", "Klokan", "Čimpanza", "Ljenjivac"],
+            "correct": [0]
+        },
+        {
+            "id": 5,
+            "question": "Koja se životinja hrani gotovo isključivo bambusom?",
+            "answers": ["Panda", "Klokan", "Čimpanza", "Ljenjivac"],
+            "correct": [0]
+        }
+    ]
+}
