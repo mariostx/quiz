@@ -8,9 +8,6 @@ function App() {
     <div className="App">
       <Menu />
       <Quiz />
-      {/* <header className="App-header">
-      <Quiz/>
-      </header> */}
     </div>
   );
 }
