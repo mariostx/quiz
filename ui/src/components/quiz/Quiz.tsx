@@ -1,12 +1,21 @@
+import { useFetch } from "api/http/AxiosHooks";
+import { buildGetUrl } from "api/http/Url";
 import React, { FC, useEffect, useState } from "react";
-import data from "mock/questions.json";
+//import data from "mock/questions.json";
 // import background from '../../../public/board-114656_960_720.jpg'
 import "./style.css";
 
 interface Question {
   question: string;
+  answers: string[];
+  correct: number[];
+}
+
+interface QuestionAnswer {
+  question: string;
   answers: Answer[];
 }
+
 
 interface Answer {
   index: number; //index of origin answer
@@ -16,11 +25,15 @@ interface Answer {
 }
 
 const Quiz: FC = () => {
+  const url = buildGetUrl('/questions');
+  url.getUrlQuery().setParam('category_like', 'geography');
+  // url.getUrlQuery().setParam('language', 'hr');
   const [index, setIndex] = useState(0);
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<QuestionAnswer[]>([]);
   const [seconds, setSeconds] = useState(100);
   const [paused, setPaused] = useState(false);
   const [isTimerActive, setIsTimerActive] = useState(true);
+  const { data } = useFetch<Question[]>(url);
 
   useEffect(() => {
     if (isTimerActive) {
@@ -53,12 +66,12 @@ const Quiz: FC = () => {
   };
 
   useEffect(() => {
-    const questions: Question[] = [];
-    data.questions.forEach((question) => {
+    const questions: QuestionAnswer[] = [];
+    data?.forEach((question) => {
       const hideAnswerIndex = Math.floor(
         Math.random() * question.answers.length
       );
-      const myQuestion: Question = {
+      const myQuestion: QuestionAnswer = {
         question: question.question,
         answers: [],
       };
@@ -77,7 +90,7 @@ const Quiz: FC = () => {
     });
     setQuestions(questions);
     console.log(questions);
-  }, []);
+  }, [data]);
 
   const handleOnClick = (answer: Answer) => {
     if (answer.correct) {
