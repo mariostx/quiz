@@ -26,7 +26,7 @@ interface Answer {
 
 const Quiz: FC = () => {
   const url = buildGetUrl('/questions');
-  url.getUrlQuery().setParam('category_like', 'geography');
+  //url.getUrlQuery().setParam('category_like', 'geography');
   // url.getUrlQuery().setParam('language', 'hr');
   const [index, setIndex] = useState(0);
   const [questions, setQuestions] = useState<QuestionAnswer[]>([]);
@@ -185,7 +185,7 @@ const Quiz: FC = () => {
   };
 
   return (
-    <div className="quiz-container">
+    <div className="quiz-container quiz-div">
       <div className="statistics">
         Pitanje: {index + 1}/{questions.length}
         {isTimerActive && (
