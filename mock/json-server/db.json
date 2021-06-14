@@ -1,38 +1,154 @@
 {
-    "questions": [
-        {
-            "category": ["geography", "math"],
-            "id": 1,
-            "question": "Iz koje zemlje potječu Olimpijske igre?",
-            "answers": ["Španjolska", "Engleska", "Grčka", "Italija"],
-            "correct": [2]
-    
-        },
-        {
-            "category": "geography",
-            "language": "hr",
-            "id": 2,
-            "question": "Dolly je bila prvo klonirano živo biće ikad. O kojoj se životinji radilo?",
-            "answers": ["Štakoru", "Ovci", "Svinji", "Golubu"],
-            "correct": [1]
-        },
-        {
-            "id": 3,
-            "question": "Koje ime ne pripada sedmorici patuljaka?",
-            "answers": ["Srećko", "Plačko", "Glupko", "Ljutko"],
-            "correct": [1]
-        },
-        {
-            "id": 4,
-            "question": "Koja se životinja hrani gotovo isključivo bambusom?",
-            "answers": ["Panda", "Klokan", "Čimpanza", "Ljenjivac"],
-            "correct": [0]
-        },
-        {
-            "id": 5,
-            "question": "xx Koja se životinja hrani gotovo isključivo bambusom?",
-            "answers": ["x Panda", "Klokan", "Čimpanza", "Ljenjivac"],
-            "correct": [0]
-        }
-    ]
+  "questions": [
+    {
+      "id": 1,
+      "question": "Iz koje zemlje potječu Olimpijske igre?",
+      "answers": [
+        "Španjolska",
+        "Engleska",
+        "Grčka",
+        "Italija"
+      ],
+      "correct": [
+        2
+      ],
+      "category": ["Zemljopis"],
+      "language": "hr",
+      "created": "2021-05-11T10:10:16.333Z"
+    },
+    {
+      "id": 2,
+      "question": "Dolly je bila prvo klonirano živo biće ikad. O kojoj se životinji radilo?",
+      "answers": [
+        "Štakoru",
+        "Ovci",
+        "Svinji",
+        "Golubu"
+      ],
+      "correct": [
+        1
+      ],
+      "category": ["Životinje", "Biologija", "Opće znanje"],
+      "language": "hr",
+      "created": "2021-06-11T11:20:11.333Z"
+    },
+    {
+      "id": 3,
+      "question": "Koje ime ne pripada sedmorici patuljaka?",
+      "answers": [
+        "Srećko",
+        "Plačko",
+        "Glupko",
+        "Ljutko"
+      ],
+      "correct": [
+        1
+      ],
+      "category": ["Film"],
+      "language": "hr",
+      "created": "2021-06-11T20:22:12.333Z"
+    },
+    {
+      "id": 4,
+      "author": "admin",
+      "question": "Koja se životinja hrani gotovo isključivo bambusom?",
+      "answers": [
+        "Panda",
+        "Klokan",
+        "Čimpanza",
+        "Ljenjivac"
+      ],
+      "correct": [
+        0
+      ],
+      "category": ["Životinje"],
+      "language": "hr",
+      "created": "2021-06-10T20:20:11.333Z"
+    },
+    {
+      "id": 5,
+      "author": "admin",
+      "question": "Koji je planet najtopliji u Sunčevom sustavu??",
+      "answers": [
+        "Venera",
+        "Mars",
+        "Merkur",
+        "Neptun"
+      ],
+      "correct": [
+        0
+      ],
+      "category": ["Astronomija"],
+      "language": "hr",
+      "created": "2021-05-23T22:22:11.333Z"
+    },
+    {
+      "id": 6,
+      "author": "admin",
+      "question": "Koji je glavni grad Hrvatske",
+      "answers": [
+        "Zagreb",
+        "Osijek",
+        "Split",
+        "Dubrovnik"
+      ],
+      "correct": [
+        0
+      ],
+      "category": ["Zemljopis"],
+      "language": "hr",
+      "created": "2021-06-11T22:20:11.333Z"
+    },
+    {
+      "id": 7,
+      "author": "admin",
+      "question": "Koji je najveći ocean",
+      "answers": [
+        "Atlantski ocean",
+        "Tihi ocean",
+        "Indijski ocean",
+        "Južni ocean"
+      ],
+      "correct": [
+        1
+      ],
+      "category": ["Zempljopis"],
+      "language": "hr",
+      "created": "2021-06-12T20:20:11.333Z"
+    },
+    {
+      "id": 8,
+      "author": "admin",
+      "question": "Koje je godine Titanik potonuo u Atlantski ocean 15. travnja?",
+      "answers": [
+        "1910",
+        "1914",
+        "1918",
+        "1912"
+      ],
+      "correct": [
+        3
+      ],
+      "category": ["Povijest"],
+      "language": "hr",
+      "created": "2021-06-13T20:20:11.333Z"
+    },
+    {
+      "id": 9,
+      "author": "admin",
+      "question": "Koliko prosječno udisaja dnevno ima ljudsko tijelo?",
+      "answers": [
+        "10,000 dnevno",
+        "15,000 dnevno",
+        "20,000 dnevno",
+        "30,000 dnevno"
+      ],
+      "correct": [
+        2
+      ],
+      "category": ["Opće znanje"],
+      "language": "hr",
+      "created": "2021-06-13T20:30:10.266Z"
+    }
+  ]
 }
