@@ -6,13 +6,31 @@ $menuColor: #33CCFF;
     color: blue;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding-right: 30px;
+    justify-content: flex-start;
+    padding: 0 30px;
     margin: 30px 150px;
     border-radius: 25px;
     font-size: 0.9rem;
-    
+}
+
+.link {
+    padding: 0 10px;
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+}
+
+.menu-item {
+    padding: 0 10px;
     &:hover {
-        color: cornflowerblue;
-      }
+      color: cornflowerblue;
+    }
+}
+
+.justify-end {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
 }

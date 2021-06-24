@@ -1,8 +1,6 @@
 import UrlQuery from "./UrlQuery";
 
-// const envApiHostname = process.env['REACT_APP_ENV'] === 'production' ? 
-//     window.config.apiUrl : process.env['REACT_APP_API_HOSTNAME'];
-
+//TODO read from the environment file
 const envApiHostname = 'http://localhost:3100';
 
 export interface UrlParams {
@@ -11,7 +9,6 @@ export interface UrlParams {
     query?: string | UrlQuery;
 }
 
-//url = host + endpoint + url query
 class Url {
 
     private origin: string;
@@ -49,7 +46,7 @@ class Url {
 //helper functions are used to create the Url object in one line instead of
 //usual way to create the object and then setting its props in several lines
 //helper function to create Url object
-export const buildUrl =
+export const createUrl =
     (
         path: string,
         params?: {
@@ -68,8 +65,8 @@ export const buildUrl =
     };
 
 //helper function to create Url object with default pagination
-export const buildGetUrl = (path: string, pathPlaceholderValues?: string[]): Url => {
-    return buildUrl(path, {
+export const createGetUrl = (path: string, pathPlaceholderValues?: string[]): Url => {
+    return createUrl(path, {
         defaultPagination: true,
         pathPlaceholderValues: pathPlaceholderValues
     });

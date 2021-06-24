@@ -12,7 +12,9 @@
       "correct": [
         2
       ],
-      "category": ["Zemljopis"],
+      "category": [
+        "Zemljopis"
+      ],
       "language": "hr",
       "created": "2021-05-11T10:10:16.333Z"
     },
@@ -28,7 +30,11 @@
       "correct": [
         1
       ],
-      "category": ["Životinje", "Biologija", "Opće znanje"],
+      "category": [
+        "Životinje",
+        "Biologija",
+        "Opće znanje"
+      ],
       "language": "hr",
       "created": "2021-06-11T11:20:11.333Z"
     },
@@ -44,7 +50,9 @@
       "correct": [
         1
       ],
-      "category": ["Film"],
+      "category": [
+        "Film"
+      ],
       "language": "hr",
       "created": "2021-06-11T20:22:12.333Z"
     },
@@ -61,7 +69,9 @@
       "correct": [
         0
       ],
-      "category": ["Životinje"],
+      "category": [
+        "Životinje"
+      ],
       "language": "hr",
       "created": "2021-06-10T20:20:11.333Z"
     },
@@ -78,7 +88,9 @@
       "correct": [
         0
       ],
-      "category": ["Astronomija"],
+      "category": [
+        "Astronomija"
+      ],
       "language": "hr",
       "created": "2021-05-23T22:22:11.333Z"
     },
@@ -95,7 +107,9 @@
       "correct": [
         0
       ],
-      "category": ["Zemljopis"],
+      "category": [
+        "Zemljopis"
+      ],
       "language": "hr",
       "created": "2021-06-11T22:20:11.333Z"
     },
@@ -112,7 +126,9 @@
       "correct": [
         1
       ],
-      "category": ["Zempljopis"],
+      "category": [
+        "Zempljopis"
+      ],
       "language": "hr",
       "created": "2021-06-12T20:20:11.333Z"
     },
@@ -129,7 +145,9 @@
       "correct": [
         3
       ],
-      "category": ["Povijest"],
+      "category": [
+        "Povijest"
+      ],
       "language": "hr",
       "created": "2021-06-13T20:20:11.333Z"
     },
@@ -146,9 +164,130 @@
       "correct": [
         2
       ],
-      "category": ["Opće znanje"],
+      "category": [
+        "Opće znanje"
+      ],
       "language": "hr",
       "created": "2021-06-13T20:30:10.266Z"
+    },
+    {
+      "author": "admin",
+      "question": "Which of these was not imported to Europe from the \"New World\"?",
+      "answers": [
+        "Sweet Potato",
+        "Cucumber",
+        "Tomato",
+        "Chocolate"
+      ],
+      "correct": [
+        1
+      ],
+      "category": "General",
+      "language": "en",
+      "created": "2021-06-23T22:02:56.876Z",
+      "id": 10
+    },
+    {
+      "author": "admin",
+      "question": "What is the most common blood type in humans?",
+      "answers": [
+        "A",
+        "B",
+        "AB",
+        "O"
+      ],
+      "correct": [
+        3
+      ],
+      "category": "General",
+      "language": "en",
+      "created": "2021-06-23T22:04:32.580Z",
+      "id": 11
+    },
+    {
+      "author": "admin",
+      "question": "How many prime numbers are there between 10 and 100?",
+      "answers": [
+        "10",
+        "13",
+        "21",
+        "29"
+      ],
+      "correct": [
+        2
+      ],
+      "category": "General",
+      "language": "en",
+      "created": "2021-06-23T22:07:25.282Z",
+      "id": 12
+    },
+    {
+      "author": "admin",
+      "question": "How many rows of stars are there on an American flag?",
+      "answers": [
+        "7",
+        "9",
+        "11",
+        "13"
+      ],
+      "correct": [
+        1
+      ],
+      "category": "General",
+      "language": "en",
+      "created": "2021-06-23T22:08:43.797Z",
+      "id": 13
+    },
+    {
+      "author": "admin",
+      "question": "How many elements in the periodic table begin with the letter 'Z'?",
+      "answers": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct": [
+        1
+      ],
+      "category": "General",
+      "language": "en",
+      "created": "2021-06-23T22:09:41.935Z",
+      "id": 14
+    },
+    {
+      "author": "admin",
+      "question": "The headquarter of International Committee of the Red Cross (or simply Red Cross) is located in",
+      "answers": [
+        "New York",
+        "Washington",
+        "Geneva",
+        "The Hague"
+      ],
+      "correct": [
+        2
+      ],
+      "category": "General Knowledge",
+      "language": "en",
+      "created": "2021-06-23T22:15:16.172Z",
+      "id": 15
+    },
+    {
+      "author": "admin",
+      "question": "The longest international border between the two countries is the border between",
+      "answers": [
+        "Argentina and Chile",
+        "China and Russia",
+        "Kazakhstan and Russia",
+        "Canada and United States"
+      ],
+      "correct": [
+        3
+      ],
+      "category": "General Knowledge",
+      "language": "en",
+      "created": "2021-06-23T22:17:49.618Z",
+      "id": 16
     }
   ]
 }

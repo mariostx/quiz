@@ -7,7 +7,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {
   HashRouter as Router,
   Switch,
-  Route
+  Route,
 } from "react-router-dom";
 
 function App() {
@@ -22,6 +22,12 @@ function App() {
         <div className="App">
           <Menu />
           {/* <QuestionEdit /> */}
+          <div>
+        {/* <ul>
+          <Link to="/quiz">Quiz Game</Link>
+          <Link to="/question">Question Edit</Link>
+        </ul> */}
+      </div>
         <Switch>
           <Route exact path="/">
             <Quiz />
@@ -29,7 +35,7 @@ function App() {
           <Route exact path="/quiz">
             <Quiz />
           </Route>
-          <Route exact path="/question">
+          <Route exact path="/question/new">
             <QuestionEdit />
           </Route>
         </Switch>

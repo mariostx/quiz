@@ -1,47 +1,56 @@
-div {
-    min-width: 40vw;
+.question-edit {
+  min-width: 70vw;
 }
 
 .container-flex {
-    margin-top: 50px;
-    margin-left: 200px;
-    display: flex;
+  margin-top: 25px;
+  margin-left: 200px;
+  display: flex;
 }
 
 .margin-bottom-10 {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
-.margin-top-10 {
-    margin-top: 25px;
+.margin-top-1 {
+  margin-top: 25px;
+}
+
+.margin-top-2 {
+  margin-top: 40px;
 }
 
 .margin-10-0 {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .radioButton {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .answers {
-    margin-left: 30px;
-    padding: 10px 0;
+  margin-left: 50px;
+  padding: 10px 0;
+  min-width: 30vw;
 }
 
 label {
-    color: white;
+  color: white;
 }
 
 Box {
-    color: white;
+  color: white;
 }
 
 .correct-answer {
-    color: green;
-    background-color: lightgreen;
+  color: green;
+  background-color: lightgreen;
 }
 
 .correct-answer .element .style {
-    color: green;
+  color: green;
+}
+
+.radio-button {
+  margin-left: 10px;
 }

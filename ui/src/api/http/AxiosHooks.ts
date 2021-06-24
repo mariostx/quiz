@@ -23,7 +23,7 @@ export const useFetch =
         const [loading, setLoading] = useState(false);
         const isMounted = useRef(true);
         const ongoingRequest = axios.CancelToken.source();
-    
+
         const fetchData = async (): Promise<void> => {
             if (url === null) {
                 return;
@@ -62,7 +62,7 @@ export const useFetch =
                     ongoingRequest.cancel();
                 };
             }
-           
+
         }, [urlString]);
 
         useEffect(() => {
@@ -77,5 +77,5 @@ export const useFetch =
             fetchData();
         };
 
-        return {data, loading, error, reloadData, url};
+        return { data, loading, error, reloadData, url };
     };

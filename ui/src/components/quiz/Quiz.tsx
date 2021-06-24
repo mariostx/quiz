@@ -1,8 +1,8 @@
 import { useFetch } from "api/http/AxiosHooks";
-import { buildGetUrl } from "api/http/Url";
-import React, { FC, useEffect, useState } from "react";
-//import data from "mock/questions.json";
-// import background from '../../../public/board-114656_960_720.jpg'
+import { createGetUrl } from "api/http/Url";
+import React, { FC, useEffect, useReducer, useState } from "react";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import CancelIcon from "@material-ui/icons/Cancel";
 import "./style.css";
 
 interface Question {
@@ -14,8 +14,9 @@ interface Question {
 interface QuestionAnswer {
   question: string;
   answers: Answer[];
+  userAnswers: number[];
+  correct: number[];
 }
-
 
 interface Answer {
   index: number; //index of origin answer
@@ -25,15 +26,16 @@ interface Answer {
 }
 
 const Quiz: FC = () => {
-  const url = buildGetUrl('/questions');
+  const url = createGetUrl("/questions");
   //url.getUrlQuery().setParam('category_like', 'geography');
-  // url.getUrlQuery().setParam('language', 'hr');
-  const [index, setIndex] = useState(0);
+  url.getUrlQuery().setParam("language", "en");
+  const [questionIndex, setQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState<QuestionAnswer[]>([]);
   const [seconds, setSeconds] = useState(100);
   const [paused, setPaused] = useState(false);
-  const [isTimerActive, setIsTimerActive] = useState(true);
+  const [isTimerActive, setIsTimerActive] = useState(false);
   const { data } = useFetch<Question[]>(url);
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
     if (isTimerActive) {
@@ -46,21 +48,20 @@ const Quiz: FC = () => {
   }, [seconds, paused, isTimerActive]);
 
   useEffect(() => {
-    const isLastPage = () =>
-      questions.length === 0 ? true : index === questions.length - 1;
+    const isLastPage = () => (questions.length === 0 ? true : questionIndex === questions.length - 1);
     if (seconds === 0) {
-      setIndex((index) => (isLastPage() ? index : ++index));
+      setQuestionIndex((index) => (isLastPage() ? index : ++index));
       if (!isLastPage()) {
         setSeconds(100);
       }
     }
-  }, [seconds, questions.length, index]);
+  }, [seconds, questions.length, questionIndex]);
 
   //https://javascript.info/array-methods#shuffle-an-array
   //Fisher-Yates shuffle
-  const shuffle = (array: Array<any>) => {
+  const shuffle = (array: Array<Answer>) => {
     for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+      const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
       [array[i], array[j]] = [array[j], array[i]];
     }
   };
@@ -68,12 +69,12 @@ const Quiz: FC = () => {
   useEffect(() => {
     const questions: QuestionAnswer[] = [];
     data?.forEach((question) => {
-      const hideAnswerIndex = Math.floor(
-        Math.random() * question.answers.length
-      );
+      const hideAnswerIndex = Math.floor(Math.random() * question.answers.length);
       const myQuestion: QuestionAnswer = {
         question: question.question,
         answers: [],
+        userAnswers: [],
+        correct: question.correct,
       };
       question.answers.forEach((answer, index) => {
         myQuestion.answers.push({
@@ -92,53 +93,82 @@ const Quiz: FC = () => {
     console.log(questions);
   }, [data]);
 
-  const handleOnClick = (answer: Answer) => {
-    if (answer.correct) {
-      console.log("točan odgovor");
-    } else {
-      console.log("netočan odgovor");
+  const handleOnAnswerClick = (answer: Answer, question: QuestionAnswer) => {
+    if (question.userAnswers.length === 0) {
+      question.userAnswers.push(answer.index);
     }
+    forceUpdate();
   };
 
   const Choice = (props: any) => <div> {props.children} </div>;
 
+  function showAnswerIcon(question: QuestionAnswer, answer: Answer): JSX.Element {
+    if (question.userAnswers.length !== 0) {
+      if (answer.correct) {
+        return (
+          <div className='answer-icon green-icon'>
+            <CheckCircleIcon />
+          </div>
+        );
+      }
+      if (question.userAnswers[0] === answer.index && !answer.correct) {
+        return (
+          <div className='answer-icon red-icon'>
+            <CancelIcon />
+          </div>
+        );
+      }
+    }
+    return (
+      <div className='answer-icon' style={{ visibility: "hidden" }}>
+        <CancelIcon />
+      </div>
+    );
+  }
   const Question = () => {
     const elements = [];
+    let currentQuestion: QuestionAnswer;
 
     if (questions.length > 0) {
-      if (index < 0 || index > questions.length) {
+      if (questionIndex < 0 || questionIndex > questions.length) {
         //TODO internationalization
         return <label>Ooops, something's wrong, page is out of range</label>;
       }
-
+      currentQuestion = questions[questionIndex];
       //question
       elements.push(
-        <div key="question" className="question">
-          {questions[index].question}
+        <div key='question' className='question'>
+          {currentQuestion.question}
         </div>
       );
       //answers
-      const answers = questions[index].answers;
+      const answers = questions[questionIndex].answers;
       //hook use for hotkeys
       //https://stackoverflow.com/questions/62933902/varying-number-of-hooks-for-keyboard-shortcuts
       answers.forEach((answer, index) => {
         elements.push(
           <Choice key={"panel" + index}>
-            <div className="choice" key={index}>
+            <div className='choice' key={index}>
               <br />
-              <div className="answer gray-transparent">
+              <div
+                className='answer gray-transparent'
+                onClick={() => {
+                  handleOnAnswerClick(answer, currentQuestion);
+                }}
+              >
                 <label
-                  className="label"
-                  onClick={() => {
-                    handleOnClick(answer);
-                  }}
+                  className='label'
+                  // onClick={() => {
+                  //   handleOnAnswerClick(answer, currentQuestion);
+                  // }}
                 >
                   {index +
                     1 +
                     ". " +
-                    (answer?.hideAnswer ? "?????" : answer.answer)}
+                    (currentQuestion.userAnswers.length === 0 && answer?.hideAnswer ? "?????" : answer.answer)}
                 </label>
               </div>
+              {showAnswerIcon(currentQuestion, answer)}
             </div>
           </Choice>
         );
@@ -150,118 +180,119 @@ const Quiz: FC = () => {
     return <>{elements}</>;
   };
 
-  const handleKeyDown = (e: any) => {
-    console.log(e.key);
-    if (!isNaN(parseInt(e.key))) {
-      console.log("Number"!);
-      const question = questions[index];
-      const hotkey = parseInt(e.key);
-      if (hotkey > 0 && hotkey <= question.answers.length) {
-        console.log(
-          question.answers[hotkey - 1].answer,
-          question.answers[hotkey - 1].index
-        );
-      }
-    }
-  };
+  // const handleKeyDown = (e: any) => {
+  //   console.log(e.key);
+  //   if (!isNaN(parseInt(e.key))) {
+  //     console.log("Number"!);
+  //     const question = questions[questionIndex];
+  //     const hotkey = parseInt(e.key);
+  //     if (hotkey > 0 && hotkey <= question.answers.length) {
+  //       console.log(question.answers[hotkey - 1].answer, question.answers[hotkey - 1].index);
+  //     }
+  //   }
+  // };
 
-  const TimerButtons = () => {
-    return questions.length - 1 === index && seconds === 0 ? (
-      <button
-        onClick={() => {
-          if (seconds === 0) {
-            setSeconds(100);
-            setIndex(0);
-          }
-        }}
-      >
-        Reset
-      </button>
-    ) : (
-      <button onClick={() => setPaused((paused) => !paused)}>
-        {paused ? "Continue" : "Pause"}
-      </button>
-    );
+  // const TimerButtons = () => {
+  //   return questions.length - 1 === questionIndex && seconds === 0 ? (
+  //     <button
+  //       onClick={() => {
+  //         if (seconds === 0) {
+  //           setSeconds(100);
+  //           setQuestionIndex(0);
+  //         }
+  //       }}
+  //     >
+  //       Reset
+  //     </button>
+  //   ) : (
+  //     <button onClick={() => setPaused((paused) => !paused)}>{paused ? "Continue" : "Pause"}</button>
+  //   );
+  // };
+
+  const getCorrectStatistics = (): string => {
+    let correctAnswers = 0;
+    let totalAnswers = 0;
+    questions.forEach((question) => {
+      if (question.userAnswers.length > 0) {
+        totalAnswers++;
+        if (question.userAnswers[0] === question.correct[0]) {
+          correctAnswers++;
+        }
+      }
+    });
+    return `${correctAnswers}/${totalAnswers}`;
   };
 
   return (
-    <div className="quiz-container quiz-div">
-      <div className="statistics">
-        Pitanje: {index + 1}/{questions.length}
-        {isTimerActive && (
-          <div className="statistics">{Math.ceil(seconds / 10)}</div>
-        )}
+    <div className='quiz-container quiz-div'>
+      <div className='statistics'>
+        <div className='flex-center'>
+          <div>
+            Question: {questionIndex + 1}/{questions.length}
+          </div>
+          <div>Correct: {getCorrectStatistics()}</div>
+        </div>
+        {isTimerActive && <div className='statistics'>{Math.ceil(seconds / 10)}</div>}
       </div>
-      <div className="question-container">
+      <div className='question-container'>
         {/* <div
           className="background"
           tabIndex={-1}
           onKeyDown={(e) => handleKeyDown(e)}
         > */}
-          {/* <div style={{
+        {/* <div style={{
                         alignContent: '100px 100px' 
                     }}> */}
-          <div>
-            <Question />
-            {isTimerActive &&
-              (questions.length - 1 === index && seconds === 0 ? (
-                <div style={{ margin: "20px" }}>
-                  <button
-                    className="button"
-                    onClick={() => {
-                      if (seconds === 0) {
-                        setSeconds(100);
-                        setIndex(0);
-                      }
-                    }}
-                  >
-                    Reset
-                  </button>
-                </div>
-              ) : (
-                <div style={{ margin: "20px" }}>
-                  <button
-                    className="button"
-                    onClick={() => setPaused((paused) => !paused)}
-                  >
-                    {paused ? "Continue" : "Pause"}
-                  </button>
-                </div>
-              ))}
-            {!isTimerActive && (
+        <div>
+          <Question />
+          {isTimerActive &&
+            (questions.length - 1 === questionIndex && seconds === 0 ? (
               <div style={{ margin: "20px" }}>
                 <button
-                  className="button"
-                  onClick={() =>
-                    setIndex((index) => (index === 0 ? index : --index))
-                  }
+                  className='button'
+                  onClick={() => {
+                    if (seconds === 0) {
+                      setSeconds(100);
+                      setQuestionIndex(0);
+                    }
+                  }}
                 >
-                  Previous
-                </button>
-                &nbsp;&nbsp;&nbsp;
-                <button
-                  className="button"
-                  onClick={() =>
-                    setIndex((index) =>
-                      index === questions.length - 1 ? index : ++index
-                    )
-                  }
-                >
-                  Next
+                  Reset
                 </button>
               </div>
-            )}
-          </div>
+            ) : (
+              <div style={{ margin: "20px" }}>
+                <button className='button' onClick={() => setPaused((paused) => !paused)}>
+                  {paused ? "Continue" : "Pause"}
+                </button>
+              </div>
+            ))}
+          {!isTimerActive && (
+            <div style={{ margin: "20px" }}>
+              <button className='button' onClick={() => setQuestionIndex((index) => (index === 0 ? index : --index))}>
+                Previous
+              </button>
+              &nbsp;&nbsp;&nbsp;
+              <button
+                className='button'
+                onClick={() => setQuestionIndex((index) => (index === questions.length - 1 ? index : ++index))}
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </div>
         {/* </div> */}
       </div>
-      <div className="stoperica">
+      <div className='stoperica'>
         <label>
           <input
-            type="checkbox"
+            type='checkbox'
+            disabled={true}
             defaultChecked={isTimerActive}
             onChange={(e) => setIsTimerActive(e.target.checked)}
           />
-          Štoperica
+          Timer
         </label>
       </div>
     </div>

@@ -9,7 +9,7 @@
   margin-top: 50px;
   min-width: 300px;
   max-width: 800px;
-  width: 50%;
+  width: 80%;
   height: 50%;
   align-items: center;
   display: flex;
@@ -37,9 +37,8 @@
 .statistics {
   color: lightblue;
   font-weight: bold;
-  padding-top: 10px;
   max-height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 /* https://stackoverflow.com/questions/5703552/how-can-i-center-text-horizontally-and-vertically-inside-a-div-block */
@@ -59,6 +58,15 @@
 
 .choice {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-center {
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -138,4 +146,16 @@ buttons button:hover {
   color: white;
   max-height: 50px;
   margin-top: auto;
+}
+
+.answer-icon {
+  margin: 10px;
+}
+
+.red-icon {
+  color: red;
+}
+
+.green-icon {
+  color: green;
 }
