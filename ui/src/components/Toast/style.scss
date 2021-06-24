@@ -1,0 +1,108 @@
+@import "src/styles/colors";
+
+@mixin toastSize {
+  width: 380px;
+  height: 64px;
+  margin: 0;
+  padding: 5px;
+}
+@mixin toastContent {
+  width: 100%;
+  height: 54px;
+  position: relative;
+}
+
+@mixin toastImage {
+  width: 14px;
+  height: 14px;
+  float: left;
+  margin-left: 20px;
+  margin-right: 10px;
+  top: 50%;
+  margin-top: 1.2em;
+}
+
+@mixin toastMessage {
+  width: 300px;
+  height: auto;
+  float: right;
+  top: 50%;
+  margin-top: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Toastify__toast-container {
+  @include toastSize;
+
+  .Toastify__toast--success {
+    @include toastSize;
+    background-color: $toastSuccessBg;
+
+    .toastContent {
+      @include toastContent;
+
+      #toastImg {
+        @include toastImage;
+      }
+
+      .toastMessage {
+        @include toastMessage;
+        color: $toastFontColorLight;
+      }
+    }
+  }
+  .Toastify__toast--error {
+    @include toastSize;
+    background-color: $toastErrorBg;
+    .toastContent {
+      @include toastContent;
+
+      #toastImg {
+        @include toastImage;
+      }
+
+      .toastMessage {
+        @include toastMessage;
+        color: $toastFontColorLight;
+      }
+    }
+  }
+
+  .Toastify__toast--info {
+    @include toastSize;
+    background-color: $toastInfoBg;
+    .Toastify__close-button {
+      color: $toastFontColorDark;
+    }
+    .toastContent {
+      @include toastContent;
+
+      #toastImg {
+        @include toastImage;
+      }
+
+      .toastMessage {
+        @include toastMessage;
+        color: $toastFontColorDark;
+      }
+    }
+  }
+  .Toastify__toast--warning {
+    @include toastSize;
+    background-color: $toastWarningBg;
+    .toastContent {
+      @include toastContent;
+
+      #toastImg {
+        @include toastImage;
+      }
+
+      .toastMessage {
+        @include toastMessage;
+        color: $toastFontColorLight;
+      }
+    }
+  }
+}

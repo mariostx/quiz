@@ -5,20 +5,20 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CancelIcon from "@material-ui/icons/Cancel";
 import "./style.css";
 
-interface Question {
+interface IQuestion {
   question: string;
   answers: string[];
   correct: number[];
 }
 
-interface QuestionAnswer {
+interface IShuffeledQuestion {
   question: string;
-  answers: Answer[];
+  answers: IAnswer[];
   userAnswers: number[];
   correct: number[];
 }
 
-interface Answer {
+interface IAnswer {
   index: number; //index of origin answer
   answer: string;
   correct?: boolean;
@@ -30,11 +30,11 @@ const Quiz: FC = () => {
   //url.getUrlQuery().setParam('category_like', 'geography');
   url.getUrlQuery().setParam("language", "en");
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [questions, setQuestions] = useState<QuestionAnswer[]>([]);
+  const [questions, setQuestions] = useState<IShuffeledQuestion[]>([]);
   const [seconds, setSeconds] = useState(100);
   const [paused, setPaused] = useState(false);
   const [isTimerActive, setIsTimerActive] = useState(false);
-  const { data } = useFetch<Question[]>(url);
+  const { data } = useFetch<IQuestion[]>(url);
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const Quiz: FC = () => {
 
   //https://javascript.info/array-methods#shuffle-an-array
   //Fisher-Yates shuffle
-  const shuffle = (array: Array<Answer>) => {
+  const shuffle = (array: Array<IAnswer>) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
       [array[i], array[j]] = [array[j], array[i]];
@@ -67,10 +67,10 @@ const Quiz: FC = () => {
   };
 
   useEffect(() => {
-    const questions: QuestionAnswer[] = [];
+    const questions: IShuffeledQuestion[] = [];
     data?.forEach((question) => {
       const hideAnswerIndex = Math.floor(Math.random() * question.answers.length);
-      const myQuestion: QuestionAnswer = {
+      const myQuestion: IShuffeledQuestion = {
         question: question.question,
         answers: [],
         userAnswers: [],
@@ -90,10 +90,9 @@ const Quiz: FC = () => {
       questions.push(myQuestion);
     });
     setQuestions(questions);
-    console.log(questions);
   }, [data]);
 
-  const handleOnAnswerClick = (answer: Answer, question: QuestionAnswer) => {
+  const handleOnAnswerClick = (answer: IAnswer, question: IShuffeledQuestion) => {
     if (question.userAnswers.length === 0) {
       question.userAnswers.push(answer.index);
     }
@@ -102,7 +101,7 @@ const Quiz: FC = () => {
 
   const Choice = (props: any) => <div> {props.children} </div>;
 
-  function showAnswerIcon(question: QuestionAnswer, answer: Answer): JSX.Element {
+  function showAnswerIcon(question: IShuffeledQuestion, answer: IAnswer): JSX.Element {
     if (question.userAnswers.length !== 0) {
       if (answer.correct) {
         return (
@@ -127,12 +126,12 @@ const Quiz: FC = () => {
   }
   const Question = () => {
     const elements = [];
-    let currentQuestion: QuestionAnswer;
+    let currentQuestion: IShuffeledQuestion;
 
     if (questions.length > 0) {
       if (questionIndex < 0 || questionIndex > questions.length) {
         //TODO internationalization
-        return <label>Ooops, something's wrong, page is out of range</label>;
+        return <label>Ooops, something is wrong</label>;
       }
       currentQuestion = questions[questionIndex];
       //question
@@ -156,12 +155,7 @@ const Quiz: FC = () => {
                   handleOnAnswerClick(answer, currentQuestion);
                 }}
               >
-                <label
-                  className='label'
-                  // onClick={() => {
-                  //   handleOnAnswerClick(answer, currentQuestion);
-                  // }}
-                >
+                <label className='label'>
                   {index +
                     1 +
                     ". " +
@@ -175,7 +169,7 @@ const Quiz: FC = () => {
       });
     } else {
       //TODO internationalization
-      return <label>Ooops, something's wrong, no questions</label>;
+      return <label>Ooops, something is wrong, no questions</label>;
     }
     return <>{elements}</>;
   };
@@ -235,14 +229,6 @@ const Quiz: FC = () => {
         {isTimerActive && <div className='statistics'>{Math.ceil(seconds / 10)}</div>}
       </div>
       <div className='question-container'>
-        {/* <div
-          className="background"
-          tabIndex={-1}
-          onKeyDown={(e) => handleKeyDown(e)}
-        > */}
-        {/* <div style={{
-                        alignContent: '100px 100px' 
-                    }}> */}
         <div>
           <Question />
           {isTimerActive &&
@@ -282,7 +268,6 @@ const Quiz: FC = () => {
             </div>
           )}
         </div>
-        {/* </div> */}
       </div>
       <div className='stoperica'>
         <label>

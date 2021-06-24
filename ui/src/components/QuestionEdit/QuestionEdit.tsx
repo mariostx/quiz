@@ -1,6 +1,8 @@
 import { Button, FormControl, Grid, Radio, TextField } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import axios from "axios";
+import { AxiosResponse } from "axios";
+import { showErrorToast, showInfoToast } from "components/Toast/Toast";
 import React, { FC, useState } from "react";
 import "./style.css";
 
@@ -40,7 +42,6 @@ const QuestionEdit: FC = () => {
   const handleRootAttribChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const name = event?.currentTarget?.name;
     const value = event?.currentTarget?.value;
-    console.log(name, value);
     if (name) {
       setQuestionData((questionData) => {
         return { ...questionData, [name]: value };
@@ -65,6 +66,7 @@ const QuestionEdit: FC = () => {
   const createAnswerElements = () => {
     return questionData?.answers?.map((answer: string, index: number) => {
       return (
+        // eslint-disable-next-line react/jsx-key
         <Grid container direction='row' justify='flex-start' alignItems='center'>
           <div
             key={index}
@@ -75,7 +77,9 @@ const QuestionEdit: FC = () => {
             <TextField
               label={"Answer" + (index + 1)}
               type='text'
-              onChange={(event) => handleAnswerChange(event, index)}
+              onChange={(event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+                handleAnswerChange(event, index)
+              }
               value={answer}
               required={true}
               fullWidth={true}
@@ -99,8 +103,15 @@ const QuestionEdit: FC = () => {
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     questionData.created = new Date().toISOString();
-    console.log("question", questionData);
-    axios.post("http://localhost:3100/questions", questionData).then((response) => setQuestionData(initQuestion));
+    axios
+      .post("http://localhost:3100/questions", questionData)
+      .then((response: AxiosResponse) => {
+        if (response.status === 201) {
+          showInfoToast("Question saved");
+          setQuestionData(initQuestion);
+        }
+      })
+      .catch(() => showErrorToast("Not saved, something's went wrong"));
   };
 
   return (

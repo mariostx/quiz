@@ -16,8 +16,6 @@
   flex-direction: column;
   justify-content: center;
   background-image: url("images/chalkboard-chalk-texture-school-board-display-background_43429-108.jpg");
-  /* min-width: 40vw; */
-  /* min-height: 30vh; */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -41,8 +39,6 @@
   margin-bottom: 5px;
 }
 
-/* https://stackoverflow.com/questions/5703552/how-can-i-center-text-horizontally-and-vertically-inside-a-div-block */
-/* https://blog.hubspot.com/website/center-div-css */
 .question {
   color: white;
   font-size: calc(0.8em + 0.5vw);
@@ -81,25 +77,18 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Green */
-
 .background {
   background-color: silver;
-  /* height: 60vh; */
 }
 
 .backgroundImage {
-  /* backgroundImage:  `url(images/board-114656_960_720.jpg)`; */
   background-image: url("images/chalkboard-chalk-texture-school-board-display-background_43429-108.jpg");
-  /* min-width: 40vw; */
-  /* min-height: 30vh; */
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   position: fixed;
   top: 50%;
   left: 50%;
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
   display: flex;
   flex-flow: row wrap;
@@ -110,7 +99,6 @@
 
 .button {
   background-color: #4c90af;
-  /* Green */
   border: none;
   color: white;
   padding: 10px 20px;
