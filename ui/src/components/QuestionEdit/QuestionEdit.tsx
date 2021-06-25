@@ -1,7 +1,6 @@
 import { Button, FormControl, Grid, Radio, TextField } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import axios from "axios";
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { showErrorToast, showInfoToast } from "components/Toast/Toast";
 import React, { FC, useState } from "react";
 import "./style.css";
@@ -152,6 +151,7 @@ const QuestionEdit: FC = () => {
                 onChange={(event) => handleRootAttribChange(event)}
                 required={true}
                 InputLabelProps={{ shrink: true }}
+                disabled={true}
               />
             </div>
             <div className='margin-top-1'>

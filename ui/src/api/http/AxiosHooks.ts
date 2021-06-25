@@ -1,4 +1,4 @@
-//import { showErrorToast,  ToastMessage } from 'components/Toast/Toast';
+import { showErrorToast, ToastMessage } from 'components/Toast/Toast';
 import axios from 'axios';
 import Url from 'api/http/Url';
 import { useEffect, useRef, useState } from 'react';
@@ -45,7 +45,7 @@ export const useFetch =
                 .catch(error => {
                     if (isMounted.current) {
                         setError(error);
-                        //showErrorToast(ToastMessage.unsuccessful.get);
+                        showErrorToast(ToastMessage.unsuccessful.get);
                     }
                 })
                 .finally(() => {

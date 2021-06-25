@@ -19,6 +19,7 @@ module.exports = {
     // indent: ["error", 2],
     // semi: ["error", "always"],
     // quotes: ["error", "single", { avoidEscape: true, allowTemplateLiterals: true }],
+    "react/prop-types": "off",
     "max-len": [
       "error",
       {
